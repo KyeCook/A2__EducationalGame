@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Educational Game</string>
+
+    <string name="settings_button">Settings Button</string>
+    <string name="fullScreen_content">Application\nCONTENT</string>
+    <string name="playGame_button">Proceed to Game</string>
+</resources>
