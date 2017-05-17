@@ -9,6 +9,7 @@ Created by Kye Cook on @date
 package com.example.kyecook.educationalgame;
 
 import android.annotation.SuppressLint;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +21,12 @@ import android.view.View;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class FullscreenActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
+
+    /* Variables for Highscores Database */
+
+    public static SQLiteDatabase mDatabase;
+
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -108,6 +114,7 @@ public class FullscreenActivity extends AppCompatActivity {
             public void onClick(View view) {
                 toggle();
             }
+
         });
 
         // Upon interacting with UI controls, delay any scheduled hide()
@@ -124,6 +131,8 @@ public class FullscreenActivity extends AppCompatActivity {
         // created, to briefly hint to the user that UI controls
         // are available.
         delayedHide(100);
+
+        mDatabase = new HighScoreDatabase(getApplicationContext()).getWritableDatabase();
     }
 
     private void toggle() {
@@ -168,4 +177,5 @@ public class FullscreenActivity extends AppCompatActivity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
+
 }

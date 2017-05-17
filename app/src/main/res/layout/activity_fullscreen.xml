@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0099cc"
-    tools:context="com.example.kyecook.educationalgame.FullscreenActivity">
+    tools:context="com.example.kyecook.educationalgame.MainActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
@@ -57,6 +57,14 @@
 
             <Button
                 android:id="@+id/settingsHandler"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/scores_button" />
+
+            <Button
+                android:id="@+id/scoresHandler"
                 style="?metaButtonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
