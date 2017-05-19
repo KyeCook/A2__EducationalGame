@@ -14,7 +14,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:keepScreenOn="true"
-        android:text="@string/fullScreen_content"
         android:textColor="#33b5e5"
         android:textSize="50sp"
         android:textStyle="bold" />
@@ -29,7 +28,24 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.8"/>
+            android:layout_weight="0.2"
+            android:text="@string/welcomeMessage"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textAlignment="center"
+            android:textStyle="normal|bold"
+            android:textSize="30sp"
+            android:paddingTop="25dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.6"
+            android:text="@string/gameInfoMessage"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp" />
 
         <Button
             android:text="@string/playGame_button"
@@ -37,7 +53,11 @@
             android:layout_height="0dp"
             android:layout_weight="0.2"
             android:layout_gravity="bottom"
-            android:id="@+id/button" />
+            android:id="@+id/game_handler"
+            android:elevation="0dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="normal|bold"
+            android:textSize="30sp" />
     </LinearLayout>
 
     <FrameLayout
@@ -54,22 +74,6 @@
             android:background="@color/black_overlay"
             android:orientation="horizontal"
             tools:ignore="UselessParent">
-
-            <Button
-                android:id="@+id/settingsHandler"
-                style="?metaButtonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/scores_button" />
-
-            <Button
-                android:id="@+id/scoresHandler"
-                style="?metaButtonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/settings_button" />
 
         </LinearLayout>
     </FrameLayout>

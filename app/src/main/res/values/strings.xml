@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">Educational Game</string>
-
-    <string name="settings_button">Settings</string>
-    <string name="scores_button">Scores</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_highscores">Scores</string>
     <string name="fullScreen_content">Application\nCONTENT</string>
     <string name="playGame_button">Proceed to Game</string>
+    <string name="welcomeMessage">Welcome to the game</string>
+    <string name="gameInfoMessage">
+        Here you will learn what to do and where to go in the case of an earthquake
+        emergency.\n\n Click the Proceed to Game button to begin your learning experience.\n\nGood Luck!
+    </string>
 </resources>
