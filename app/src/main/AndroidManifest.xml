@@ -20,7 +20,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".HighscoresActivity" />
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".SettingsActivity" />
+        <activity
+            android:name=".GameScreen"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_game_screen"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>

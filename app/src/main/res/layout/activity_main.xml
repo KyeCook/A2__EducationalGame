@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.2"
+            android:layout_weight="0.1"
             android:text="@string/welcomeMessage"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textAlignment="center"
@@ -39,7 +39,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.6"
+            android:layout_weight="0.4"
             android:text="@string/gameInfoMessage"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="20sp"
@@ -47,13 +47,34 @@
             android:paddingEnd="15dp"
             android:paddingStart="15dp" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:text="@string/createUser_button" />
+
+        </LinearLayout>
+
+
         <Button
             android:text="@string/playGame_button"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.2"
+            android:layout_weight="0.1"
             android:layout_gravity="bottom"
             android:id="@+id/game_handler"
+            android:onClick="gameHandler"
             android:elevation="0dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textStyle="normal|bold"
@@ -71,9 +92,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
+            android:background="@color/colorPrimary"
             android:orientation="horizontal"
             tools:ignore="UselessParent">
+
+            <Button
+                android:id="@+id/returnButtonHandler"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/return_button"
+                android:textSize="20sp"/>
 
         </LinearLayout>
     </FrameLayout>

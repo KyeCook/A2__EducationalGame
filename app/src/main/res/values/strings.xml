@@ -6,7 +6,12 @@
     <string name="playGame_button">Proceed to Game</string>
     <string name="welcomeMessage">Welcome to the game</string>
     <string name="gameInfoMessage">
-        Here you will learn what to do and where to go in the case of an earthquake
-        emergency.\n\n Click the Proceed to Game button to begin your learning experience.\n\nGood Luck!
+        Here you will be tested on your general knowledge!\n\n Type your name into the textfield
+        followed by save to set your High Scores Name\n\n Click the Proceed to Game button to begin
+        your learning experience.\n\nGood Luck!
     </string>
+    <string name="title_activity_game_screen">GameScreen</string>
+    <string name="hiding_location">Hiding Location</string>
+    <string name="createUser_button">SAVE</string>
+    <string name="return_button">Return</string>
 </resources>

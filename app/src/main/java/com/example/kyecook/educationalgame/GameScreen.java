@@ -1,16 +1,8 @@
-/*
-
-Created by Kye Cook on @date
-
-
- */
-
-
 package com.example.kyecook.educationalgame;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,27 +11,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-
-// todo research dimming of screen when exiting full screen mode.
-// todo Figure out how to make it long press instead of single click
-// todo Create Settings Menu
-// todo ext - store users choice in shared preferences?
-// todo Integrate Twitter
-// todo Integrate Phone Axis Movement
-//    todo allow user to create database entry. ie textedit field with save button for thier name
-//    todo put Buttons back in when fullscreen hidden to allow user to get back to game
-public class MainActivity extends AppCompatActivity {
-
-    /* Variables for Highscores Database */
-
-    public static SQLiteDatabase mDatabase;
-
+public class GameScreen extends AppCompatActivity {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -95,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
             hide();
         }
     };
+
+
+
     /**
      * Touch listener to use for in-layout UI controls to delay hiding the
      * system UI. This is to prevent the jarring behavior of controls going away
@@ -110,25 +96,23 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    private SharedPreferences preferences;
+
+    private GridView answers_gridview;
+    private ArrayAdapter<String> possibleAnswers;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game_screen);
 
-        mVisible = true;
-        mControlsView = findViewById(R.id.fullscreen_content_controls);
-        mContentView = findViewById(R.id.fullscreen_content);
+        possibleAnswers = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
 
-        // Set up the user interaction to manually show or hide the system UI.
-        mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggle();
-            }
+        answers_gridview = (GridView) findViewById(R.id.answers_gridview);
+        answers_gridview.setAdapter(possibleAnswers);
 
-        });
-
+        preferences = getSharedPreferences("gamePreferences", MODE_PRIVATE);
 
         Button returnButton = (Button) findViewById(R.id.returnButtonHandler);
 
@@ -139,12 +123,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /* ##################  Android Fullscreen Activity code  ####################### */
+
+        mVisible = true;
+        mControlsView = findViewById(R.id.fullscreen_content_controls);
+        mContentView = findViewById(R.id.fullscreen_content);
+
+
+        // Set up the user interaction to manually show or hide the system UI.
+        mContentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toggle();
+            }
+        });
+
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.returnButtonHandler).setOnTouchListener(mDelayHideTouchListener);
-
-
     }
 
     @Override
@@ -155,8 +152,6 @@ public class MainActivity extends AppCompatActivity {
         // created, to briefly hint to the user that UI controls
         // are available.
         delayedHide(100);
-
-        mDatabase = new HighScoreDatabase(getApplicationContext()).getWritableDatabase();
     }
 
     private void toggle() {
@@ -232,5 +227,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameScreen.class);
         startActivity(intent);
     }
-
 }
