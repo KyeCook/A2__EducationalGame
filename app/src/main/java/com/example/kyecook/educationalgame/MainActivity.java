@@ -171,34 +171,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-        Button setUser = (Button) findViewById(R.id.createUser);
-
-        setUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                updateUser();
-
-            }
-        });
-
-
-
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.returnButtonHandler).setOnTouchListener(mDelayHideTouchListener);
 
 
-    }
-
-    public void updateUser(){
-        ContentValues insertValues = new ContentValues();
-        insertValues.put(HIGHSCORES_COLUMN_USER, userText);
-        insertValues.put(HIGHSCORES_COLUMN_SCORE, 0);
-        mDatabase.insert("highscores", null, insertValues);
     }
 
     @Override
@@ -276,8 +254,10 @@ public class MainActivity extends AppCompatActivity {
         } else if(id == R.id.action_highscores){
             Intent intent = new Intent(this, HighscoresActivity.class);
             startActivity(intent);
+        } else if(id == R.id.action_playAgain) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
-
         return super.onOptionsItemSelected(item);
     }
 

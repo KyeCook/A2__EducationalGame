@@ -49,10 +49,13 @@ public class EducationalGameDatabase extends SQLiteOpenHelper {
         questionsArray.add("A newborn Chinese water deer is so small it can almost be held in the palm of the hand?");
         questionsArray.add("Ostriches can run faster than horses, and the males can roar like lions?");
 
-//        String[] questionsArray = {"Can Gorillas catch human colds and other illnesses? ",
-//                "A newborn Chinese water deer is so small it can almost be held in the palm of the hand?",
-//        "Ostriches can run faster than horses, and the males can roar like lions?", };
-        String[] correctAnswersArray = {"TRUE", "FALSE", "TRUE"};
+
+        ArrayList<String> correctAnswersArray = new ArrayList<>();
+
+        correctAnswersArray.add("TRUE");
+        correctAnswersArray.add("FALSE");
+        correctAnswersArray.add("TRUE");
+//        String[] correctAnswersArray = {"TRUE", "FALSE", "TRUE"};
 
 
         for(int i = 0; i < questionsArray.size(); i++){
@@ -60,7 +63,7 @@ public class EducationalGameDatabase extends SQLiteOpenHelper {
 
 
             insertValues.put(QUESTIONS_COLUMN_QUESTION, questionsArray.get(i));
-            insertValues.put(QUESTIONS_COLUMN_ANSWER, correctAnswersArray[i]);
+            insertValues.put(QUESTIONS_COLUMN_ANSWER, correctAnswersArray.get(i));
 
             db.insert(QUESTIONS_TABLE_NAME, null, insertValues);
         }
