@@ -1,9 +1,9 @@
 package com.example.kyecook.educationalgame;
 
 
-import static com.example.kyecook.educationalgame.HighScoreDatabase.HIGHSCORES_COLUMN_SCORE;
-import static com.example.kyecook.educationalgame.HighScoreDatabase.HIGHSCORES_COLUMN_USER;
-import static com.example.kyecook.educationalgame.HighScoreDatabase.HIGHSCORES_TABLE_NAME;
+import static com.example.kyecook.educationalgame.EducationalGameDatabase.HIGHSCORES_COLUMN_SCORE;
+import static com.example.kyecook.educationalgame.EducationalGameDatabase.HIGHSCORES_COLUMN_USER;
+import static com.example.kyecook.educationalgame.EducationalGameDatabase.HIGHSCORES_TABLE_NAME;
 
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +27,7 @@ public class HighscoresActivity extends AppCompatActivity {
         Cursor cursor = getAllPersons();
 
         highscoresList = (ListView) findViewById(R.id.highscoresList);
+        highscoresArray = new ArrayList<>();
 
         while(cursor.moveToNext()){
             String user = cursor.getString(cursor.getColumnIndex(HIGHSCORES_COLUMN_USER));
@@ -34,15 +35,13 @@ public class HighscoresActivity extends AppCompatActivity {
 
             highscoresArray.add(new HighScore(score, user));
 
-
         }
 
-        highscoresList.setAdapter(new ArrayAdapter<HighScore>(this.getApplicationContext(), R.layout.text_view , highscoresArray));
+        highscoresList.setAdapter(new ArrayAdapter<>(this.getApplicationContext(), R.layout.text_view , highscoresArray));
     }
 
     public Cursor getAllPersons() {
         return MainActivity.mDatabase.rawQuery("SELECT * FROM " + HIGHSCORES_TABLE_NAME, null);
 
     }
-
 }

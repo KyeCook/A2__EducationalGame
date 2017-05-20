@@ -3,6 +3,7 @@ package com.example.kyecook.educationalgame;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,37 +12,28 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
+
+
+import java.util.ArrayList;
+
+import static com.example.kyecook.educationalgame.EducationalGameDatabase.QUESTIONS_TABLE_NAME;
+import static com.example.kyecook.educationalgame.EducationalGameDatabase.QUESTIONS_COLUMN_QUESTION;
+import static com.example.kyecook.educationalgame.EducationalGameDatabase.QUESTIONS_COLUMN_ANSWER;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class GameScreen extends AppCompatActivity {
-    /**
-     * Whether or not the system UI should be auto-hidden after
-     * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
-     */
+public class GameScreenActivity extends AppCompatActivity {
+
     private static final boolean AUTO_HIDE = true;
-
-    /**
-     * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
-     * user interaction before hiding the system UI.
-     */
     private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
-
-    /**
-     * Some older devices needs a small delay between UI widget updates
-     * and a change of the status and navigation bar.
-     */
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
     private View mContentView;
+
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -98,8 +90,17 @@ public class GameScreen extends AppCompatActivity {
 
     private SharedPreferences preferences;
 
-    private GridView answers_gridview;
-    private ArrayAdapter<String> possibleAnswers;
+    private int questionNumber;
+
+    private ArrayList<Questions> questionsArrayList;
+
+//    private ArrayAdapter<String> questionsArrayList;
+    private TextView questionText;
+    private Button answerTrue;
+    private Button answerFalse;
+    private String userName;
+    private TextView userScore;
+    private int userCurrentScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,23 +108,7 @@ public class GameScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_game_screen);
 
-        possibleAnswers = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-
-        answers_gridview = (GridView) findViewById(R.id.answers_gridview);
-        answers_gridview.setAdapter(possibleAnswers);
-
-        preferences = getSharedPreferences("gamePreferences", MODE_PRIVATE);
-
-        Button returnButton = (Button) findViewById(R.id.returnButtonHandler);
-
-        returnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hide();
-            }
-        });
-
-        /* ##################  Android Fullscreen Activity code  ####################### */
+        /* ##################  Android Fullscreen Activity code  ############################# */
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
@@ -142,6 +127,98 @@ public class GameScreen extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.returnButtonHandler).setOnTouchListener(mDelayHideTouchListener);
+
+        /* ################################################################################## */
+
+        /* getIntent.getIntExtra("name_of_extra", -1); */
+
+        userName = (String) getIntent().getExtras().get("userName");
+        userScore = (TextView) findViewById(R.id.scoreText);
+        userCurrentScore = 0;
+
+        userScore.setText(userName + " : " + userCurrentScore);
+
+        answerTrue = (Button) findViewById(R.id.true_handler);
+        answerTrue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(questionsArrayList.get(questionNumber).getAnswer().equals("TRUE")){
+                    userCurrentScore +=100;
+                    nextQuestion();
+                } else {
+                    nextQuestion();
+                }
+            }
+        });
+
+        answerFalse = (Button) findViewById(R.id.false_handler);
+        answerFalse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(questionsArrayList.get(questionNumber).getAnswer().equals("FALSE")){
+                    userCurrentScore +=100;
+                    nextQuestion();
+                } else {
+                    nextQuestion();
+                }
+            }
+        });
+
+        questionText = (TextView)findViewById(R.id.questionText);
+        questionNumber = 0;
+//        questionsArrayList = new ArrayList<>(this, android.R.layout.simple_list_item_1);
+
+        Cursor cursor = getAllQuestions();
+
+        questionsArrayList = new ArrayList<>();
+
+
+        while(cursor.moveToNext()){
+            String question = cursor.getString(cursor.getColumnIndex(QUESTIONS_COLUMN_QUESTION));
+            String answer = cursor.getString(cursor.getColumnIndex(QUESTIONS_COLUMN_ANSWER));
+
+
+            questionsArrayList.add(new Questions(question,answer));
+
+            System.out.println(questionsArrayList);
+
+        }
+
+        questionText.setText(questionsArrayList.get(questionNumber).getQuestion());
+
+        preferences = getSharedPreferences("gamePreferences", MODE_PRIVATE);
+
+        Button returnButton = (Button) findViewById(R.id.returnButtonHandler);
+
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hide();
+            }
+        });
+
+    }
+
+    public Cursor getAllQuestions() {
+        return MainActivity.mDatabase.rawQuery("SELECT * FROM " + QUESTIONS_TABLE_NAME, null);
+    }
+
+//    Method to change to next question
+    public void nextQuestion(){
+
+        userScore.setText(userName + " : " + userCurrentScore);
+
+        if(questionNumber == questionsArrayList.size() - 1){
+//            Takes user to High Scores Screen
+            Intent intent = new Intent(this, HighscoresActivity.class);
+            startActivity(intent);
+
+        }
+        else {
+            questionNumber ++;
+            questionText.setText(questionsArrayList.get(questionNumber).getQuestion());
+        }
+
     }
 
     @Override
@@ -224,7 +301,7 @@ public class GameScreen extends AppCompatActivity {
     }
 
     public void gameHandler(View view) {
-        Intent intent = new Intent(this, GameScreen.class);
+        Intent intent = new Intent(this, GameScreenActivity.class);
         startActivity(intent);
     }
 }

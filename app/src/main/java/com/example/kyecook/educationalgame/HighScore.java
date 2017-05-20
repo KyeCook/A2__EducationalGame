@@ -12,6 +12,8 @@ public class HighScore {
         return score;
     }
 
+
+
     public String getName() {
         return name;
     }
@@ -21,4 +23,7 @@ public class HighScore {
         name = n;
     }
 
+    public String toString(){
+     return name + " : " + score;
+    }
 }

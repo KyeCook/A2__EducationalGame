@@ -9,17 +9,25 @@ Created by Kye Cook on @date
 package com.example.kyecook.educationalgame;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import static com.example.kyecook.educationalgame.EducationalGameDatabase.HIGHSCORES_COLUMN_SCORE;
+import static com.example.kyecook.educationalgame.EducationalGameDatabase.HIGHSCORES_COLUMN_USER;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -32,8 +40,8 @@ import android.widget.Button;
 // todo ext - store users choice in shared preferences?
 // todo Integrate Twitter
 // todo Integrate Phone Axis Movement
-//    todo allow user to create database entry. ie textedit field with save button for thier name
-//    todo put Buttons back in when fullscreen hidden to allow user to get back to game
+// todo allow user to create database entry. ie textedit field with save button for their name
+// todo put Buttons back in when fullscreen hidden to allow user to get back to game
 public class MainActivity extends AppCompatActivity {
 
     /* Variables for Highscores Database */
@@ -110,6 +118,9 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    private String userText;
+    EditText userInput;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        mDatabase = new EducationalGameDatabase(getApplicationContext()).getWritableDatabase();
 
         Button returnButton = (Button) findViewById(R.id.returnButtonHandler);
 
@@ -139,12 +151,54 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        userInput = (EditText) findViewById(R.id.userInput);
+
+
+        userInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                userText = s.toString();
+            }
+        });
+
+
+
+        Button setUser = (Button) findViewById(R.id.createUser);
+
+        setUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                updateUser();
+
+            }
+        });
+
+
+
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.returnButtonHandler).setOnTouchListener(mDelayHideTouchListener);
 
 
+    }
+
+    public void updateUser(){
+        ContentValues insertValues = new ContentValues();
+        insertValues.put(HIGHSCORES_COLUMN_USER, userText);
+        insertValues.put(HIGHSCORES_COLUMN_SCORE, 0);
+        mDatabase.insert("highscores", null, insertValues);
     }
 
     @Override
@@ -156,7 +210,6 @@ public class MainActivity extends AppCompatActivity {
         // are available.
         delayedHide(100);
 
-        mDatabase = new HighScoreDatabase(getApplicationContext()).getWritableDatabase();
     }
 
     private void toggle() {
@@ -229,8 +282,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void gameHandler(View view) {
-        Intent intent = new Intent(this, GameScreen.class);
-        startActivity(intent);
-    }
 
+        if(userText == null || userText.trim().isEmpty()){
+            Toast.makeText(this, "Please Enter Valid Name to proceed to gameplay", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(this, GameScreenActivity.class);
+            intent.putExtra("userName", userText);
+            startActivity(intent);
+        }
+    }
 }

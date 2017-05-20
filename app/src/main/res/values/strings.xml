@@ -14,4 +14,11 @@
     <string name="hiding_location">Hiding Location</string>
     <string name="createUser_button">SAVE</string>
     <string name="return_button">Return</string>
+    <string name="button_false">FALSE</string>
+    <string name="button_true">TRUE</string>
+
+    <string name="title_activity_delete">delete</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="enter_name">Enter Name :</string>
 </resources>

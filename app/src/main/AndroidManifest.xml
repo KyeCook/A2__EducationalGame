@@ -22,10 +22,10 @@
         <activity android:name=".HighscoresActivity" />
         <activity android:name=".SettingsActivity" />
         <activity
-            android:name=".GameScreen"
+            android:name=".GameScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_game_screen"
-            android:theme="@style/FullscreenTheme"></activity>
+            android:theme="@style/FullscreenTheme" />
     </application>
 
 </manifest>

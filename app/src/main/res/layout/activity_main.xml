@@ -53,16 +53,22 @@
             android:orientation="horizontal"
             android:padding="15dp">
 
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.7"/>
-
-            <Button
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.3"
-                android:text="@string/createUser_button" />
+                android:gravity="center"
+                android:text="@string/enter_name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/userInput"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7"
+                android:maxLines="1"
+                android:inputType="text"/>
 
         </LinearLayout>
 
@@ -107,5 +113,4 @@
 
         </LinearLayout>
     </FrameLayout>
-
 </FrameLayout>
