@@ -45,17 +45,30 @@ public class EducationalGameDatabase extends SQLiteOpenHelper {
 
         ArrayList<String> questionsArray = new ArrayList<>();
 
-        questionsArray.add("Can Gorillas catch human colds and other illnesses? ");
-        questionsArray.add("A newborn Chinese water deer is so small it can almost be held in the palm of the hand?");
-        questionsArray.add("Ostriches can run faster than horses, and the males can roar like lions?");
+        questionsArray.add("((22)3) = 25");
+        questionsArray.add("The slope of a vertical line is undefined");
+        questionsArray.add("Two lines with positive slopes can be perpendicular");
+        questionsArray.add("5 > 10 or 5 < 7");
+        questionsArray.add("The set of ordered pairs {(6,4),(2,-5),(-2,4),(6,-4)} is a function");
+        questionsArray.add("The additive inverse of -10 is 10");
+        questionsArray.add("The associative property is used to write 4x + 8y = 4(x + 2y)");
+        questionsArray.add("The absolute value of a real negative number is negative");
+        questionsArray.add("-23 = (-2)3");
+        questionsArray.add("30% of x is equal to 0.03x");
 
 
         ArrayList<String> correctAnswersArray = new ArrayList<>();
 
+        correctAnswersArray.add("FALSE");
         correctAnswersArray.add("TRUE");
         correctAnswersArray.add("FALSE");
         correctAnswersArray.add("TRUE");
-//        String[] correctAnswersArray = {"TRUE", "FALSE", "TRUE"};
+        correctAnswersArray.add("FALSE");
+        correctAnswersArray.add("FALSE");
+        correctAnswersArray.add("FALSE");
+        correctAnswersArray.add("FALSE");
+        correctAnswersArray.add("TRUE");
+        correctAnswersArray.add("FALSE");
 
 
         for(int i = 0; i < questionsArray.size(); i++){

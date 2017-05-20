@@ -24,6 +24,7 @@
         </activity>
         <activity android:name=".HighscoresActivity" />
         <activity android:name=".SettingsActivity" />
+        <activity android:name=".Authenticate"/>
         <activity
             android:name=".GameScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
