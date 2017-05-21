@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 
 public class EducationalGameDatabase extends SQLiteOpenHelper {
-    private static final int VERSION = 11;
+    private static final int VERSION = 12;
     private static final String DATABASE_NAME = "highscores.db";
     public static final String HIGHSCORES_TABLE_NAME = "highscores";
     static final String HIGHSCORES_COLUMN_UUID = "uuid";
