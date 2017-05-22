@@ -112,11 +112,13 @@ public class GameScreenActivity extends AppCompatActivity {
     private ArrayList<Questions> questionsArrayList;
 
     private TextView questionText;
+    private TextView questionNumberText;
     private Button answerTrue;
     private Button answerFalse;
     private String userName;
     private TextView userScore;
     private int userCurrentScore;
+    private String formattingString;
 
 
     @Override
@@ -152,8 +154,11 @@ public class GameScreenActivity extends AppCompatActivity {
         userScore = (TextView) findViewById(R.id.scoreText);
         userCurrentScore = 0;
 
+        questionNumberText = (TextView) findViewById(R.id.questionNumber);
         questionText = (TextView)findViewById(R.id.questionText);
         questionNumber = 0;
+
+        formattingString = "Question Number : " + (questionNumber + 1);
 
         userScore.setText(userName + " : " + userCurrentScore);
 
@@ -198,6 +203,8 @@ public class GameScreenActivity extends AppCompatActivity {
         }
 
         questionText.setText(questionsArrayList.get(questionNumber).getQuestion());
+
+        questionNumberText.setText(formattingString);
 
         preferences = getSharedPreferences("gamePreferences", MODE_PRIVATE);
 
@@ -254,6 +261,9 @@ public class GameScreenActivity extends AppCompatActivity {
         else {
             questionNumber ++;
             questionText.setText(questionsArrayList.get(questionNumber).getQuestion());
+            formattingString = "Question Number : " + (questionNumber + 1);
+
+            questionNumberText.setText(formattingString);
         }
 
     }
@@ -342,9 +352,6 @@ public class GameScreenActivity extends AppCompatActivity {
             startActivity(intent);
         } else if(id == R.id.action_highscores){
             Intent intent = new Intent(this, HighscoresActivity.class);
-            startActivity(intent);
-        } else if(id == R.id.action_playAgain) {
-            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
 

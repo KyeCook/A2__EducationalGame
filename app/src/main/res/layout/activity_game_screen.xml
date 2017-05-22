@@ -25,23 +25,45 @@
         android:orientation="vertical">
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:text="@string/true_or_false"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Notification.Title.Media"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/questionNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text=""
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="25sp"
+            />
+
+        <TextView
             android:id="@+id/questionText"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_margin="60dp"
             android:layout_weight="0.8"
             android:gravity="center"
-            android:padding="30dp"
-            android:text="Default Text"
+            android:text=""
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Notification.Title.Media"
-            android:textSize="20sp" />
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/scoreText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="TextView"
+            android:text=""
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="14sp" />
 

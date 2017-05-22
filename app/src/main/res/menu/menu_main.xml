@@ -12,9 +12,4 @@
         android:orderInCategory="100"
         android:title="@string/action_highscores"
         app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_playAgain"
-        android:orderInCategory="100"
-        android:title="@string/action_playAgain"
-        app:showAsAction="ifRoom" />
 </menu>

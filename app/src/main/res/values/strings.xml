@@ -22,4 +22,6 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="enter_name">Enter Name :</string>
     <string name="action_playAgain">Play Again</string>
+    <string name="play_again">Play Again</string>
+    <string name="true_or_false">TRUE OR FALSE?</string>
 </resources>

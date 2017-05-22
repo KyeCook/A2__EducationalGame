@@ -254,9 +254,6 @@ public class MainActivity extends AppCompatActivity {
         } else if(id == R.id.action_highscores){
             Intent intent = new Intent(this, HighscoresActivity.class);
             startActivity(intent);
-        } else if(id == R.id.action_playAgain) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

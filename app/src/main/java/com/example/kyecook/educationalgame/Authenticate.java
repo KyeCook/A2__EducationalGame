@@ -12,6 +12,12 @@ import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
+/*
+*
+* Sets Authentication of Twitter API to allow for calls to Twitter
+*
+* */
+
 public class Authenticate extends AppCompatActivity {
 
     WebView webView;
